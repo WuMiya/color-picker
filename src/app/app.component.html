@@ -1,7 +1,80 @@
+<!-- NGX Color Picker -->
 <div>
-  <h3>Colour Picker</h3>
-  <div>
-    <input [style.background]="color1" />
+  <h3 [style.color]="color">Using NGX Color Picker - Font color</h3>
+  <p>Colour: 
+    <span 
+      class="preview-inner" 
+      [(colorPicker)]="color" 
+      [style.background]="color" 
+      [cpPresetColors]="cpPresetColors" 
+      [cpOutputFormat]="'hex'" 
+      [cpPosition] ="'bottom'"
+      [cpPresetLabel] ="''"
+    ></span>
+  </p>
+</div>
+
+
+<!-- NGX-Color -->
+<div>
+    <h3 [style.color]="primaryColor">Using NGX-Color - Font color</h3>
+    <p>Colour: 
+      <span class="preview-inner" 
+        [style.background]="primaryColor"
+        (click)="show =!show" >
+      </span>
+    </p>
+  
+    <div class="colour-picker" *ngIf="show" >
+      <div style="padding: 20px">
+        <div 
+          class="color-box" 
+          [style.background]="'linear-gradient(' + '0.25turn' +',' + '#222' + ',' + primaryColor + ')'">
+        </div>
+        <color-hue-picker
+          [color]="state"
+          (onChangeComplete)="changeComplete($event)"
+          (onChange)="changeComplete($event)">
+        </color-hue-picker>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Manually build -->
+<div>
+  <h3 [style.color]="selectedColour">Manually - Font color</h3>
+  <p>Colour: 
+    <span class="preview-inner" 
+      (click)="show =!show" 
+      [style.background]="selectedColour">
+    </span>
+  </p>
+
+  <div class="colour-picker" *ngIf="show" >
+    <div style="padding: 20px">
+      <div 
+        class="preview-inner" 
+        *ngFor="let colour of cpPresetColors" 
+        [style.background]="colour" 
+        (click)="onSelect(colour)">
+      </div>
+      <div 
+        class="color-box" 
+        [style.background]="'linear-gradient(' + '0.25turn' +',' + '#222' + ',' + selectedColour + ')'">
+      </div>
+      <p>Recent</p>
+      <div 
+        class="preview-inner" 
+        *ngFor="let recentCol of recentChoose" 
+        [style.background]="recentCol" 
+        (click)="reuseCol(recentCol)">
+      </div>
+    </div>
   </div>
 </div>
+
+
 

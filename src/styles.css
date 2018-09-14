@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+.color-picker .left {
+    
+}
+
+.color-picker .type-policy {
+    display: none;
+}
+
+.color-picker .right {
+    padding: 0px 8px;
+}
+
+.hue-picker {
+    width: 180px !important;
+    margin: 20px 0px;
+}
