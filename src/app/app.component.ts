@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ColorEvent } from 'ngx-color';
+
+import { OnInit, Output, Input, EventEmitter } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -31,26 +34,15 @@ export class AppComponent {
     }
   }
 
-  title = 'app';
-  primaryColor = '#194D33';
-  state = {
-    h: 150,
-    s: 0.50,
-    l: 0.20,
-    a: 1,
-  };
-
-  changeComplete($event: ColorEvent) {
-    this.state = $event.color.hsl;
-    this.primaryColor = $event.color.hex;
-  }
-
   reuseCol(recentCol) {
     this.selectedColour = recentCol;
     const index = this.recentChoose.findIndex( c => c === this.selectedColour)
     this.recentChoose.splice(index,1);
     this.recentChoose.unshift(this.selectedColour);
   }
+  
+
+
 
 }
 

@@ -1,12 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-.color-picker .left {
-    
-}
-
-.color-picker .type-policy {
-    display: none;
-}
-
 .color-picker .right {
     padding: 0px 8px;
 }
@@ -14,4 +6,23 @@
 .hue-picker {
     width: 180px !important;
     margin: 20px 0px;
+}
+
+.color-picker .selected-color {
+    top: 49px !important;
+    left: 193px !important;
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 0 !important;
+}
+
+.color-picker .type-policy, .selected-color-background {
+    display: none !important;
+}
+
+.color-picker .right {
+    padding: 5px 8px 0 0 !important;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
 }

@@ -3,7 +3,7 @@
   <h3 [style.color]="color">Using NGX Color Picker - Font color</h3>
   <p>Colour: 
     <span 
-      class="preview-inner" 
+      class="innercolor-box" 
       [(colorPicker)]="color" 
       [style.background]="color" 
       [cpPresetColors]="cpPresetColors" 
@@ -14,40 +14,11 @@
   </p>
 </div>
 
-
-<!-- NGX-Color -->
-<div>
-    <h3 [style.color]="primaryColor">Using NGX-Color - Font color</h3>
-    <p>Colour: 
-      <span class="preview-inner" 
-        [style.background]="primaryColor"
-        (click)="show =!show" >
-      </span>
-    </p>
-  
-    <div class="colour-picker" *ngIf="show" >
-      <div style="padding: 20px">
-        <div 
-          class="color-box" 
-          [style.background]="'linear-gradient(' + '0.25turn' +',' + '#222' + ',' + primaryColor + ')'">
-        </div>
-        <color-hue-picker
-          [color]="state"
-          (onChangeComplete)="changeComplete($event)"
-          (onChange)="changeComplete($event)">
-        </color-hue-picker>
-        
-      </div>
-    </div>
-  </div>
-
-
-
 <!-- Manually build -->
 <div>
   <h3 [style.color]="selectedColour">Manually - Font color</h3>
   <p>Colour: 
-    <span class="preview-inner" 
+    <span class="innercolor-box" 
       (click)="show =!show" 
       [style.background]="selectedColour">
     </span>
@@ -56,18 +27,21 @@
   <div class="colour-picker" *ngIf="show" >
     <div style="padding: 20px">
       <div 
-        class="preview-inner" 
+        class="innercolor-box" 
         *ngFor="let colour of cpPresetColors" 
         [style.background]="colour" 
         (click)="onSelect(colour)">
       </div>
       <div 
-        class="color-box" 
-        [style.background]="'linear-gradient(' + '0.25turn' +',' + '#222' + ',' + selectedColour + ')'">
+        id="color-box" 
+        [style.background]="'linear-gradient(' + 'to top' +',' + '#000' + ',' + selectedColour + ')'"
+        (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)" (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"
+      >
+        <div id="cursor"></div>
       </div>
       <p>Recent</p>
       <div 
-        class="preview-inner" 
+        class="innercolor-box" 
         *ngFor="let recentCol of recentChoose" 
         [style.background]="recentCol" 
         (click)="reuseCol(recentCol)">
@@ -75,6 +49,4 @@
     </div>
   </div>
 </div>
-
-
 

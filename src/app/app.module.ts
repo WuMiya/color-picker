@@ -7,10 +7,12 @@ import { ColorPhotoshopModule } from 'ngx-color/photoshop';
 import { ColorHueModule }  from 'ngx-color/hue';
 
 import { AppComponent } from './app.component';
+// import { ColorPickerComponent } from './color-picker/color-picker.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // ColorPickerComponent
   ],
   imports: [
     BrowserModule,
