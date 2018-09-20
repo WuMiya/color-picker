@@ -1,15 +1,25 @@
-// import { TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { ColorPickerService } from './color-picker.service';
+import { ColorPickerComponent } from './color-picker.component';
 
-// describe('ColorPickerService', () => {
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({
-//       providers: [ColorPickerService]
-//     });
-//   });
+describe('ColorPickerComponent', () => {
+  let component: ColorPickerComponent;
+  let fixture: ComponentFixture<ColorPickerComponent>;
 
-//   it('should be created', inject([ColorPickerService], (service: ColorPickerService) => {
-//     expect(service).toBeTruthy();
-//   }));
-// });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ ColorPickerComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ColorPickerComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

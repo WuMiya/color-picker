@@ -9,6 +9,7 @@ import { OnInit, Output, Input, EventEmitter } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  color: string="red";
   show: boolean= false;
   public recentChoose: any[] = [];
   selectedColour:any ="";
@@ -42,12 +43,6 @@ export class AppComponent {
   }
   
 
-
-
-}
-
-class showColourPicker {
-  show: boolean = true;
 }
 
 

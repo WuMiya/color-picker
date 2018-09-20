@@ -1,18 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ColorPickerModule } from 'ngx-color-picker';
+// import { ColorPickerModule } from 'ngx-color-picker';
 import { FormsModule } from '@angular/forms';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ColorPhotoshopModule } from 'ngx-color/photoshop';
 import { ColorHueModule }  from 'ngx-color/hue';
 
 import { AppComponent } from './app.component';
-// import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { ColorPickerModule } from './color-picker/color-picker.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // ColorPickerComponent
+    //ColorPickerComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     ColorSketchModule,
     ColorPhotoshopModule,
-    ColorHueModule,
+    ColorHueModule
   ],
   providers: [],
   bootstrap: [AppComponent]
