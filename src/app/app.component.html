@@ -1,5 +1,5 @@
 <!-- NGX Color Picker -->
-<div>
+<!-- <div>
   <h3 [style.color]="color">Using NGX Color Picker - Font color</h3>
   <p>Colour: 
     <span 
@@ -11,11 +11,11 @@
       [cpPosition] ="'bottom'"
       [cpPresetLabel] ="''"
     ></span>
-  </p>
-</div>
+  </p> 
+</div>-->
 
 <!-- Manually build -->
-<div>
+<!-- <div>
   <h3 [style.color]="selectedColour">Manually - Font color</h3>
   <p>Colour: 
     <span class="innercolor-box" 
@@ -35,11 +35,11 @@
       <div id="color-box" 
         [style.background]="'linear-gradient(' + 'to top' +',' + '#000' + ',' + selectedColour + ')'">
         <div id="cursor"></div>
-        <!-- <div id="slider" class="slider"
+        <div id="slider" class="slider"
           [style.background]="'linear-gradient(' + 'to top' +',' + '#f00 0%'+ ',' + '#ff0 17%' + ',' + '#0f0 33%' + ',' +
             '#0ff 50%' +',' + '#00f 67%' +',' + '#f0f 83%'  +',' + '#f00 100%'+ ')'"
         >
-        </div> -->
+        </div>
       </div>
       <p>Recent</p>
       <div 
@@ -50,8 +50,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-
+<h3 [style.color]="color">Using NGX Color Picker - Font color</h3>
 <input [(colorPicker)]="color" [style.background]="color" [cpPresetColors]="cpPresetColors" [value]="color" [cpOutputFormat]="'hex'" />
 

@@ -17,8 +17,7 @@ import { ColorPickerService } from './color-picker.service';
 })
 export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
   public recentChoose: any[] = [];
-  selectedColour:any ="";
-  reuseColour:any ="";
+  reusedColor:any ="";
 
   private isIE10: boolean = false;
 
@@ -649,7 +648,7 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
       if (emit && lastOutput !== this.outputColor) {
         this.directiveInstance.colorChanged(this.outputColor);
 
-        if (this.recentChoose.includes(this.outputColor) === false) {
+        if (!this.recentChoose.includes(this.outputColor)) {
           this.recentChoose.unshift(this.outputColor);
         } else {
           const index = this.recentChoose.findIndex( c => c === this.outputColor)
@@ -660,17 +659,19 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
         if (this.recentChoose.length > 6){
           this.recentChoose.splice(-1,1);
         }
+
+        this.hexText = this.service.rgbaToHex(rgba);
       }
     }
   }
 
-  private reuseCol(recentCol): void {
-    this.selectedColour = recentCol;
-    const index = this.recentChoose.findIndex( c => c === this.selectedColour)
+  private reuseColor(recentCol): void {
+    this.reusedColor = recentCol;
+    const index = this.recentChoose.findIndex( c => c === this.reusedColor)
     this.recentChoose.splice(index,1);
-    this.recentChoose.unshift(this.selectedColour);
-    console.log(this.selectedColour);
-    console.log(this.recentChoose);
+    this.recentChoose.unshift(this.reusedColor);
+
+    this.onHexInput(this.reusedColor);
   }
 
   // Private helper functions for the color picker dialog positioning

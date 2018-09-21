@@ -9,12 +9,6 @@
       </div>
     </div>
     <div *ngIf="!cpPresetColors?.length && cpAddColorButton" class="{{cpPresetEmptyMessageClass}}">{{cpPresetEmptyMessage}}</div>
-    <p>Recent</p>
-    <div class="innercolor-box" 
-        *ngFor="let recentCol of recentChoose" 
-        [style.backgroundColor]="recentCol" 
-        (click)="reuseCol(recentCol)">
-    </div>
     <p>Custom</p>
     <div *ngIf="!cpDisableInput" class="hex-text" [class.hex-alpha]="cpAlphaChannel==='forced'" [style.display]="format !== 0 ? 'none' : 'block'">
       <div class="box">
@@ -49,6 +43,15 @@
       <div #alphaSlider class="alpha" [slider] [rgX]="1" [style.display]="cpAlphaChannel === 'disabled' ? 'none' : 'block'" [style.background-color]="alphaSliderColor" (newValue)="onAlphaChange($event)" (dragStart)="onDragStart('alpha')" (dragEnd)="onDragEnd('alpha')">
         <div class="cursor" [style.left.px]="slider.a"></div>
       </div>
+    </div>
+  </div>
+  <div class="inline-box">
+    <p>Recent</p>
+    <div class="innercolor-box" 
+        *ngFor="let recentCol of recentChoose" 
+        [style.backgroundColor]="recentCol" 
+        (newValue)="onColorChange(recentCol)"
+        (click)="reuseColor(recentCol)">
     </div>
   </div>
 

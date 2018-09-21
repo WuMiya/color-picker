@@ -9,7 +9,7 @@ import { OnInit, Output, Input, EventEmitter } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  color: string="red";
+  color: string="#3976a1";
   show: boolean= false;
   public recentChoose: any[] = [];
   selectedColour:any ="";
