@@ -203,6 +203,7 @@ p {
   flex: 1 1 auto;
   padding: 1px;
   border: #a9a9a9 solid 1px;
+  text-transform: lowercase;
 }
 
 .alpha {
