@@ -293,6 +293,20 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
       this.sliderH = this.hsva.h;
 
       this.updateColorPicker(emit, update);
+
+      if (!this.recentChoose.includes(this.outputColor)) {
+          this.recentChoose.unshift(this.outputColor);
+        } else {
+          const index = this.recentChoose.findIndex( c => c === this.outputColor)
+          this.recentChoose.splice(index,1);
+          this.recentChoose.unshift(this.outputColor);
+        }
+    
+      if (this.recentChoose.length > 6){
+        this.recentChoose.splice(-1,1);
+      }
+
+      this.hexText = value;
     }
   }
 
@@ -305,7 +319,21 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public onDragEnd(slider: string): void {
+    const rgba = this.service.hsvaToRgba(this.hsva);
     this.directiveInstance.sliderDragEnd({ slider: slider, color: this.outputColor });
+
+    if (!this.recentChoose.includes(this.outputColor)) {
+        this.recentChoose.unshift(this.outputColor);
+      } else {
+        const index = this.recentChoose.findIndex( c => c === this.outputColor)
+        this.recentChoose.splice(index,1);
+        this.recentChoose.unshift(this.outputColor);
+      }
+  
+    if (this.recentChoose.length > 6){
+      this.recentChoose.splice(-1,1);
+    }
+
   }
 
   public onDragStart(slider: string): void {
@@ -645,22 +673,22 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
         this.hsva.a * this.sliderDimMax.a - 8
       );
 
-      if (emit && lastOutput !== this.outputColor) {
+      if (emit && lastOutput !== this.selectedColor) {
         this.directiveInstance.colorChanged(this.outputColor);
 
-        if (!this.recentChoose.includes(this.outputColor)) {
-          this.recentChoose.unshift(this.outputColor);
-        } else {
-          const index = this.recentChoose.findIndex( c => c === this.outputColor)
-          this.recentChoose.splice(index,1);
-          this.recentChoose.unshift(this.outputColor);
-        }
+        // if (!this.recentChoose.includes(this.outputColor)) {
+        //   this.recentChoose.unshift(this.outputColor);
+        // } else {
+        //   const index = this.recentChoose.findIndex( c => c === this.outputColor)
+        //   this.recentChoose.splice(index,1);
+        //   this.recentChoose.unshift(this.outputColor);
+        // }
     
-        if (this.recentChoose.length > 6){
-          this.recentChoose.splice(-1,1);
-        }
+        // if (this.recentChoose.length > 6){
+        //   this.recentChoose.splice(-1,1);
+        // }
 
-        this.hexText = this.service.rgbaToHex(rgba);
+        // this.hexText = this.service.rgbaToHex(rgba);
       }
     }
   }
