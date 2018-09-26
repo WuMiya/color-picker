@@ -56,6 +56,7 @@ export class ColorPickerDirective implements OnChanges, OnDestroy {
 
   @Input() cpPresetLabel: string = 'Preset colors';
   @Input() cpPresetColors: string[];
+  @Input() recentChoose: string[];
   @Input() cpMaxPresetColorsLength: number = 6;
 
   @Input() cpPresetEmptyMessage: string = 'No colors added';
@@ -83,6 +84,7 @@ export class ColorPickerDirective implements OnChanges, OnDestroy {
   @Output() colorPickerChange = new EventEmitter<string>(false);
 
   @Output() cpPresetColorsChange = new EventEmitter<any>(true);
+  @Output() recentChooseChanged = new EventEmitter<any>(true);
 
   @HostListener('click', ['$event']) handleClick(event: any): void {
     this.inputFocus(event);
@@ -167,7 +169,7 @@ export class ColorPickerDirective implements OnChanges, OnDestroy {
         this.cpAlphaChannel, this.cpOutputFormat, this.cpDisableInput,
         this.cpIgnoredElements, this.cpSaveClickOutside, this.cpUseRootViewContainer,
         this.cpPosition, this.cpPositionOffset, this.cpPositionRelativeToArrow,
-        this.cpPresetLabel, this.cpPresetColors, this.cpMaxPresetColorsLength,
+        this.cpPresetLabel, this.cpPresetColors, this.recentChoose, this.cpMaxPresetColorsLength,
         this.cpPresetEmptyMessage, this.cpPresetEmptyMessageClass,
         this.cpOKButton, this.cpOKButtonClass, this.cpOKButtonText,
         this.cpCancelButton, this.cpCancelButtonClass, this.cpCancelButtonText,
@@ -204,6 +206,10 @@ export class ColorPickerDirective implements OnChanges, OnDestroy {
     this.ignoreChanges = ignore;
 
     this.colorPickerChange.emit(value);
+  }
+
+  public updateRecentChoose(recentChoose: string[]): void {
+    this.recentChooseChanged.emit(recentChoose);
   }
 
   public colorCanceled(): void {

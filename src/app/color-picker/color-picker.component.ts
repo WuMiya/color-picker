@@ -16,7 +16,7 @@ import { ColorPickerService } from './color-picker.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
-  public recentChoose: any[] = [];
+  public recentChoose: string[] = [];
   reusedColor:any ="";
 
   private isIE10: boolean = false;
@@ -195,7 +195,7 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
     cpAlphaChannel: AlphaChannel, cpOutputFormat: OutputFormat, cpDisableInput: boolean,
     cpIgnoredElements: any, cpSaveClickOutside: boolean, cpUseRootViewContainer: boolean,
     cpPosition: string, cpPositionOffset: string, cpPositionRelativeToArrow: boolean,
-    cpPresetLabel: string, cpPresetColors: string[], cpMaxPresetColorsLength: number,
+    cpPresetLabel: string, cpPresetColors: string[], recentChoose: string[], cpMaxPresetColorsLength: number,
     cpPresetEmptyMessage: string, cpPresetEmptyMessageClass: string,
     cpOKButton: boolean, cpOKButtonClass: string, cpOKButtonText: string,
     cpCancelButton: boolean, cpCancelButtonClass: string, cpCancelButtonText: string,
@@ -237,7 +237,7 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.fallbackColor = cpFallbackColor || '#fff';
 
     this.setPresetConfig(cpPresetLabel, cpPresetColors);
-
+    this.recentChoose = recentChoose;
     this.cpMaxPresetColorsLength = cpMaxPresetColorsLength;
     this.cpPresetEmptyMessage = cpPresetEmptyMessage;
     this.cpPresetEmptyMessageClass = cpPresetEmptyMessageClass;
@@ -294,20 +294,26 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.updateColorPicker(emit, update);
 
-      if (!this.recentChoose.includes(this.outputColor)) {
-          this.recentChoose.unshift(this.outputColor);
-        } else {
-          const index = this.recentChoose.findIndex( c => c === this.outputColor)
-          this.recentChoose.splice(index,1);
-          this.recentChoose.unshift(this.outputColor);
-        }
-    
-      if (this.recentChoose.length > 6){
-        this.recentChoose.splice(-1,1);
-      }
+      this.updateRecentChoose();
 
       this.hexText = value;
     }
+  }
+
+  public updateRecentChoose(): void {
+    if (!this.recentChoose.includes(this.outputColor)) {
+      this.recentChoose.unshift(this.outputColor);
+    } else {
+      const index = this.recentChoose.findIndex( c => c === this.outputColor)
+      this.recentChoose.splice(index,1);
+      this.recentChoose.unshift(this.outputColor);
+    }
+
+    if (this.recentChoose.length > 6){
+      this.recentChoose.splice(-1,1);
+    }
+
+    this.directiveInstance.updateRecentChoose(this.recentChoose);
   }
 
   public onResize(): void {
@@ -322,17 +328,7 @@ export class ColorPickerComponent implements OnInit, OnDestroy, AfterViewInit {
     const rgba = this.service.hsvaToRgba(this.hsva);
     this.directiveInstance.sliderDragEnd({ slider: slider, color: this.outputColor });
 
-    if (!this.recentChoose.includes(this.outputColor)) {
-        this.recentChoose.unshift(this.outputColor);
-      } else {
-        const index = this.recentChoose.findIndex( c => c === this.outputColor)
-        this.recentChoose.splice(index,1);
-        this.recentChoose.unshift(this.outputColor);
-      }
-  
-    if (this.recentChoose.length > 6){
-      this.recentChoose.splice(-1,1);
-    }
+    this.updateRecentChoose();
 
   }
 

@@ -9,9 +9,11 @@ import { OnInit, Output, Input, EventEmitter } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  color: string="#3976a1";
+  color: string="#ea4256";
   show: boolean= false;
   public recentChoose: any[] = [];
+
+  recents: string[] = [this.color];
   selectedColour:any ="";
   reuseColour:any ="";
 
@@ -35,14 +37,17 @@ export class AppComponent {
     }
   }
 
-  reuseCol(recentCol) {
+  public reuseCol(recentCol) : void {
     this.selectedColour = recentCol;
     const index = this.recentChoose.findIndex( c => c === this.selectedColour)
     this.recentChoose.splice(index,1);
     this.recentChoose.unshift(this.selectedColour);
   }
-  
 
+  
+  update($event) {
+    console.log($event);
+  }
 }
 
 

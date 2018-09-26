@@ -53,5 +53,5 @@
 </div> -->
 
 <h3 [style.color]="color">Using NGX Color Picker - Font color</h3>
-<input [(colorPicker)]="color" [style.background]="color" [cpPresetColors]="cpPresetColors" [value]="color" [cpOutputFormat]="'hex'" />
-
+<input [(colorPicker)]="color" [style.background]="color" [cpPresetColors]="cpPresetColors" [value]="color" [cpOutputFormat]="'hex'" [recentChoose]="recents" (recentChooseChanged)="update($event)"/>
+<input [(colorPicker)]="color" [style.background]="color" [cpPresetColors]="cpPresetColors" [value]="color" [cpOutputFormat]="'hex'" [recentChoose]="recents" (recentChooseChanged)="update($event)"/>
